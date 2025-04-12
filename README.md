@@ -27,6 +27,7 @@ chmod +x gradlew
 What these commands did was to update and upgrade the operating system. Then download, unzip, and prep the LanternPowerMonitor service.
 
 <br/>
+
 ** NEW TERMINAL WINDOW 2 **
 
 I may have beening doing this section wrong but this is how I got it to work. Normally after compiling you should have been able to run
@@ -51,6 +52,7 @@ new MongoConfig("MongoDB_IP", "MongoDB_User", "MongoDB_Password", "CURRENT_MONIT
 Ctrl+O to save file and Ctrl+X to exit
 
 <br/>
+
 ** MOVE BACK TO TERMINAL WINDOW 1 **
 
 This actively compiles the source code into usable binaries.
@@ -59,6 +61,7 @@ sudo ./gradlew clean build publishToMavenLocal
 ```
 
 <br/>
+
 ** MOVE BACK TO TERMINAL WINDOW 2 **
 
 This section builds the authKey.dat and moongo.cfg files that are needed for the Tomcat server LanternPowerMonitor service. One thing I figured out during this portion was that the CreateAuthKey would generate a mongo.cfg file rather than the authKey.dat file. So you have to generate the file and then mv/renmae it before generating the config. The copy commands just copied the files to a shared folder so you can get them off your virtual machine, if you do not have drag and drop enabled.
