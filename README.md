@@ -10,6 +10,7 @@ I used debian 11 and virtualbox because it is just what I had avialable while I 
 4. Once Debian 11 is installed, open a terminal
 
 
+
 **NEW TERMINAL WINDOW 1**
 
 This sets up the environment I used to compile the server's service binaries.
@@ -24,6 +25,7 @@ cd LanternPowerMonitor/java
 chmod +x gradlew
 ```
 What these commands did was to update and upgrade the operating system. Then download, unzip, and prep the LanternPowerMonitor service.
+
 
 
 **NEW TERMINAL WINDOW 2**
@@ -50,12 +52,14 @@ new MongoConfig("MongoDB_IP", "MongoDB_User", "MongoDB_Password", "CURRENT_MONIT
 Ctrl+O to save file and Ctrl+X to exit
 
 
+
 **MOVE BACK TO TERMINAL WINDOW 1**
 
 This actively compiles the source code into usable binaries.
 ```
 sudo ./gradlew clean build publishToMavenLocal
 ```
+
 
 
 **MOVE BACK TO TERMINAL WINDOW 2**
@@ -70,6 +74,7 @@ sudo cp /opt/tomcat/authKey.dat /mnt/host/authKey.dat
 sudo cp /opt/tomcat/mongo.cfg /mnt/host/mongo.cfg
 sudo cp ~/LanternPowerMonitor/java/lantern-powermonitor-service/build/libs/lantern-powermonitor-service-2.0.0-DEV.war /mnt/host/currentmonitor.war
 ```
+
 
 
 ## Diverging ##
