@@ -9,6 +9,7 @@ I used debian 11 and virtualbox because it is just what I had avialable while I 
 3. Install VirtualBox and create Debian VM. Add shared folder on host machine to VM location /mnt/host/
 4. Once Debian 11 is installed, open a terminal
 
+<br/>
 
 **NEW TERMINAL WINDOW 1**
 
