@@ -68,9 +68,8 @@ sudo cp ~/LanternPowerMonitor/java/lantern-powermonitor-service/build/libs/lante
 ```
 
 
-##Diverging##
-
-###MongoDB###
+## Diverging ##
+### MongoDB ###
 This is where everyone will go separate ways. You can have the Tomcat/MongoDB hosted on a raspiberry pi, within a server's docking container, or in some other hosting fashion. The rest of this guide was on my setup. I already had a home server running Unraid so I chose to run Tomcat/MongoDB within my docker environment.
 
 I started by creating a MongoDB container using the following options.
@@ -94,7 +93,7 @@ db.createUser(
 You best bet with this is to run the first two commands and then copy and paste the entire db.createUser().
 
 
-###MongoDB_Express Container###
+### MongoDB_Express Container ###
 I setup another container and installed the latest version of MongoDB_express with the following config.
 ![image](https://github.com/user-attachments/assets/f64ba7ac-1233-4e3e-9d0f-4bcb39ba2c92)
 
@@ -103,7 +102,7 @@ After it is installed you should be able to goto the IP:Port and login. This wil
 Yours shouldn't have CURRENT_MONITOR yet, this is a screenshot from after everything is installed.
 
 
-###Tomcat Container###
+### Tomcat Container ###
 This was a PITA. I started off by setting up the tomcat docker container with the following config. I set my tomcat container to host network instead of bridge. I am not sure why I had to do this instead of bridging. I think this was due to the self signed SSL certificates, but I am not sure. (This might also be a hold over from when I was testing the docker containers on my host system and not the server. However since I have this on host instead of bridge the ports are irrelevant to the setup of the docker container.
 ![image](https://github.com/user-attachments/assets/ee11affa-c838-4e30-9d0f-2e08b42bcdf2)
 
@@ -168,7 +167,7 @@ Then because I was testing, I shut down the Tomcat container and modified it to:
 I mounted the /opt/tomcat and /usr/local/tomcat directories so I could access them from the server system and not have to use the console again. I am not sure if it was my testing or something I did, but this broke my Tomcat container. The tomcat directory was empty when I did this, so I just copied the tomcat backup in the home directory back into /usr/local/tomcat and the container started working again.
 
 
-###Tomcat PowerLanternService setup###
+### Tomcat PowerLanternService setup ###
 I copied the authKey.dat and mongo.cfg from the debian shared folder to the Tomcat container's /opt/tomcat folder.
 
 I went to http://Unraid_IP:8080/manager/html/ and logged in.
@@ -189,7 +188,7 @@ Click on the bottom right, "Host" and change it from "LanternPowermonitor.com" t
 You can then click on signup and create an account. If everything is setup correctly you should be able to login. You can also see your account get created in MongoDB_Express, CURRENT_MONITOR\account.
 
 
-##ENERGY HUB SETUP##
+## ENERGY HUB SETUP ##
 Not a lot has to happen here other than enabling "accept_self_signed_certificates".
 To do this SSH to the IP of the energy hubs. Default user is "pi" and password is "LanternPowerMonitor"
 Then go to /opt/currentmonitor and modify the config.json file. Change:
@@ -205,7 +204,7 @@ sudo reboot
 You should be able to use the mobile app to adopt your energy hubs.
 
 
-##OTHER NOTES##
+## OTHER NOTES ##
 Log Locations
 <ins>Tomcat Container</ins>
 /usr/local/tomcat/logs/
