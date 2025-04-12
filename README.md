@@ -269,5 +269,9 @@ Energy Hub Mounted
 Energy Hubs Wired
 
 ![image](https://github.com/user-attachments/assets/9927fd13-7e83-4219-b573-738bdd0aed28)
+![image](https://github.com/user-attachments/assets/9c3208af-153f-46d1-86dd-91b6b2011f20)
+![image](https://github.com/user-attachments/assets/f8bd63e2-67a7-4e4b-b667-c9ae413a1b41)
+![image](https://github.com/user-attachments/assets/9dbabed8-d2c2-4254-8453-027485c1069b)
+
 
 
