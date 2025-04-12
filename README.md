@@ -11,6 +11,7 @@ I used debian 11 and virtualbox because it is just what I had avialable while I 
 
 
 **NEW TERMINAL WINDOW 1**
+
 This sets up the environment I used to compile the server's service binaries.
 ```
 sudo apt-get update
@@ -26,6 +27,7 @@ What these commands did was to update and upgrade the operating system. Then dow
 
 
 **NEW TERMINAL WINDOW 2**
+
 I may have beening doing this section wrong but this is how I got it to work. Normally after compiling you should have been able to run
 ```
 sudo java -jar lantern-powermonitor-config-2.0.0-DEV-all.jar com.lanternsoftware.currentmonitor.CreateAuthKey
@@ -49,6 +51,7 @@ Ctrl+O to save file and Ctrl+X to exit
 
 
 **MOVE BACK TO TERMINAL WINDOW 1**
+
 This actively compiles the source code into usable binaries.
 ```
 sudo ./gradlew clean build publishToMavenLocal
@@ -56,6 +59,7 @@ sudo ./gradlew clean build publishToMavenLocal
 
 
 **MOVE BACK TO TERMINAL WINDOW 2**
+
 This section builds the authKey.dat and moongo.cfg files that are needed for the Tomcat server LanternPowerMonitor service. One thing I figured out during this portion was that the CreateAuthKey would generate a mongo.cfg file rather than the authKey.dat file. So you have to generate the file and then mv/renmae it before generating the config. The copy commands just copied the files to a shared folder so you can get them off your virtual machine, if you do not have drag and drop enabled.
 ```
 cd ~/LanternPowerMonitor/java/lantern-powermonitor-config/build/libs
@@ -182,7 +186,9 @@ You should now be able to get to https://Unraid_IP:8443/currentmonitor/login
 ![image](https://github.com/user-attachments/assets/107dda89-2f1f-4cd3-a9dc-9bc1a2e3bf6c)
 
 Go to your Lantern Power Monitor mobile app and get to the login screen.
+
 ![image](https://github.com/user-attachments/assets/f4c9e971-3b5b-4152-9179-7628bcf22b68)
+
 Click on the bottom right, "Host" and change it from "LanternPowermonitor.com" to "https://Unraid_IP:8443".
 
 You can then click on signup and create an account. If everything is setup correctly you should be able to login. You can also see your account get created in MongoDB_Express, CURRENT_MONITOR\account.
