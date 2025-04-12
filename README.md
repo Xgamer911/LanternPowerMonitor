@@ -217,6 +217,7 @@ This gave me the Hub # V for the panel calibration.
 
 I swapped it from watts to amps in the mobile app. I then took my digital current clamp tester and hooked it to a circuit on that hub that was a stable number and not jumping around.
 ![image](https://github.com/user-attachments/assets/544edcee-2cd5-48e2-8019-62a78e0da370)
+
 I tweaked the Hub # CT number on the mobile app to match the digital current clamp reading, then saved the settings.
 
 ## OTHER NOTES ##
@@ -237,29 +238,36 @@ log.txt - Basic Energy hub logs. If you are having issues with the energy hub an
 
 ### Misc/My Setup ###
 Boards
+
 ![image](https://github.com/user-attachments/assets/7aacfec2-737f-4151-bf01-9717f521f55d)
 ![image](https://github.com/user-attachments/assets/909d6981-8b59-4f0e-9e34-74337128b79e)
 
 Starting Solder
+
 ![image](https://github.com/user-attachments/assets/fa77976c-d2ea-4591-913d-29d83b377878)
 ![image](https://github.com/user-attachments/assets/eb39148f-4fb9-49f0-a4f7-a3ab4c542bb9)
 ![image](https://github.com/user-attachments/assets/f1cc4d82-322c-4285-8672-cb9c8b97bafc)
 ![image](https://github.com/user-attachments/assets/7a3e70d4-2761-416e-bb54-3f83105f4f67)
 
 Hatted with case
+
 ![image](https://github.com/user-attachments/assets/0fc9401b-4ddc-4439-9eda-6940399b4535)
 ![image](https://github.com/user-attachments/assets/8a05a8ec-bdb2-411c-93d7-a585cf31ebef)
 
 Current Clamps
+
 ![image](https://github.com/user-attachments/assets/d9696077-9ca2-4352-84b2-c7fc12cf8653)
 
 Wire wrapping
+
 ![image](https://github.com/user-attachments/assets/52ef5f90-4650-41e3-888f-5c3f574f5281)
 
 Energy Hub Mounted
+
 ![image](https://github.com/user-attachments/assets/2e056a7c-7717-42e3-8fcb-a865b344f2b2)
 
 Energy Hubs Wired
+
 ![image](https://github.com/user-attachments/assets/9927fd13-7e83-4219-b573-738bdd0aed28)
 
 
