@@ -81,7 +81,7 @@ sudo cp ~/LanternPowerMonitor/java/lantern-powermonitor-service/build/libs/lante
 This is where everyone will go separate ways. You can have the Tomcat/MongoDB hosted on a raspiberry pi, within a server's docking container, or in some other hosting fashion. The rest of this guide was on my setup. I already had a home server running Unraid so I chose to run Tomcat/MongoDB within my docker environment.
 
 ### MongoDB ###
-I started by creating a MongoDB container using the following options.
+I started by creating a MongoDB container using the following options.  
 ![image](https://github.com/user-attachments/assets/ef42e267-f198-4489-b259-2d2b91ec4e33)
 
 I chose to have docker create an initial database/User/Password because I was also setting up a MongoDB_Express container to monitor/test everything. Also you might be able to use mongo:latest for the repository but I had to downgrade and lock mine to 4.4.18 because my server's processor does not support AVP. Once it was done installing I went into the mongo container console and ran the following commands to setup the admin user for tomcat.
@@ -104,12 +104,12 @@ You best bet with this is to run the first two commands and then copy and paste 
 <br/>
 
 ### MongoDB_Express Container ###
-I setup another container and installed the latest version of MongoDB_express with the following config.
+I setup another container and installed the latest version of MongoDB_express with the following config.  
 ![image](https://github.com/user-attachments/assets/f64ba7ac-1233-4e3e-9d0f-4bcb39ba2c92)
 
-After it is installed you should be able to goto the IP:Port and login. This will allow you to monitor and configure any MongoDB database.
+After it is installed you should be able to goto the IP:Port and login. This will allow you to monitor and configure any MongoDB database.  
 ![image](https://github.com/user-attachments/assets/319508ee-29c8-4ff4-9de9-9a75ec8cc065)
-Yours shouldn't have CURRENT_MONITOR yet, this is a screenshot from after everything is installed.
+Yours shouldn't have CURRENT_MONITOR yet, this is a screenshot from after everything is installed.  
 
 <br/>
 
@@ -180,9 +180,9 @@ I mounted the /opt/tomcat and /usr/local/tomcat directories so I could access th
 <br/>
 
 ### Tomcat PowerLanternService setup ###
-I copied the authKey.dat and mongo.cfg from the debian shared folder to the Tomcat container's /opt/tomcat folder.
+I copied the authKey.dat and mongo.cfg from the debian shared folder to the Tomcat container's /opt/tomcat folder.  
 
-I went to http://Unraid_IP:8080/manager/html/ and logged in.
+I went to http://Unraid_IP:8080/manager/html/ and logged in.  
 ![image](https://github.com/user-attachments/assets/e2559d8d-69eb-43b7-8c62-9154612744ef)
 
 I chose the WAR file from the debian shared folder and clicked deploy. This takes a few so be patience. You can also go to the MongoDB_Express if you have that setup and check if you have a CURRENT_MONITOR database yet.
@@ -204,9 +204,9 @@ You can then click on signup and create an account. If everything is setup corre
 <br/>
 
 ## ENERGY HUB SETUP ##
-Not a lot has to happen here other than enabling "accept_self_signed_certificates".
-To do this SSH to the IP of the energy hubs. Default user is "pi" and password is "LanternPowerMonitor"
-Then go to /opt/currentmonitor and modify the config.json file. Change:
+Not a lot has to happen here other than enabling "accept_self_signed_certificates".  
+To do this SSH to the IP of the energy hubs. Default user is "pi" and password is "LanternPowerMonitor"  
+Then go to /opt/currentmonitor and modify the config.json file. Change:  
 ```
   "accept_self_signed_certificates": false,
 ```
