@@ -69,6 +69,7 @@ sudo cp ~/LanternPowerMonitor/java/lantern-powermonitor-service/build/libs/lante
 
 
 ##Diverging##
+
 ###MongoDB###
 This is where everyone will go separate ways. You can have the Tomcat/MongoDB hosted on a raspiberry pi, within a server's docking container, or in some other hosting fashion. The rest of this guide was on my setup. I already had a home server running Unraid so I chose to run Tomcat/MongoDB within my docker environment.
 
