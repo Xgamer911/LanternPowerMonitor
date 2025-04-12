@@ -254,6 +254,291 @@ log.txt - CurrentMonitor.war logging. This will show what the tomcat power monit
 /opt/currentmonitor/log/  
 log.txt - Basic Energy hub logs. If you are having issues with the energy hub and tomcat server talking check here for any errors.  
 
+<br/>
+
+### TroubleShooting ###
+1) This error was in the tomcat logging and was caused by compiling the source with the wrong version of Java.
+```
+-----------------------Tomcat Catalina Log-----------------------
+2025-03-23 14:21:03 23-Mar-2025 19:21:03.399 SEVERE [http-nio-8080-exec-5] org.apache.catalina.core.StandardContext.startInternal One or more listeners failed to start. Full details will be found in the appropriate container log file
+2025-03-23 14:21:03 23-Mar-2025 19:21:03.401 SEVERE [http-nio-8080-exec-5] org.apache.catalina.core.StandardContext.startInternal Context [/lantern-powermonitor-service-2.0.0-DEV] startup failed due to previous errors
+
+-----------------------Tomcat Localhost log-----------------------
+23-Mar-2025 19:21:03.398 SEVERE [http-nio-8080-exec-5] org.apache.catalina.core.StandardContext.listenerStart Error configuring application listener of class [com.lanternsoftware.powermonitor.context.Globals]
+	java.lang.UnsupportedClassVersionError: com/lanternsoftware/powermonitor/context/Globals has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0 (unable to load class [com.lanternsoftware.powermonitor.context.Globals])
+		at org.apache.catalina.loader.WebappClassLoaderBase.findClassInternal(WebappClassLoaderBase.java:2347)
+		at org.apache.catalina.loader.WebappClassLoaderBase.findClassInternal(WebappClassLoaderBase.java:2212)
+		at org.apache.catalina.loader.WebappClassLoaderBase.findClass(WebappClassLoaderBase.java:823)
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1314)
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1162)
+		at org.apache.catalina.core.DefaultInstanceManager.loadClass(DefaultInstanceManager.java:488)
+		at org.apache.catalina.core.DefaultInstanceManager.loadClassMaybePrivileged(DefaultInstanceManager.java:470)
+		at org.apache.catalina.core.DefaultInstanceManager.newInstance(DefaultInstanceManager.java:142)
+		at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:3986)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4501)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+		at org.apache.catalina.manager.ManagerServlet.start(ManagerServlet.java:1303)
+		at org.apache.catalina.manager.HTMLManagerServlet.start(HTMLManagerServlet.java:642)
+		at org.apache.catalina.manager.HTMLManagerServlet.doPost(HTMLManagerServlet.java:188)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:199)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.CsrfPreventionFilter.doFilter(CsrfPreventionFilter.java:430)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.HttpHeaderSecurityFilter.doFilter(HttpHeaderSecurityFilter.java:129)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:597)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:937)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1793)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.lang.Thread.run(Thread.java:750)
+23-Mar-2025 19:21:03.398 SEVERE [http-nio-8080-exec-5] org.apache.catalina.core.StandardContext.listenerStart Skipped installing application listeners due to previous error(s)
+-----------------------Tomcat Localhost log-----------------------
+```
+
+2) You forgot to rename lantern-powermonitor-service-2.0.0-DEV.war to currentmonitor.war.
+```
+-----------------------Tomcat Localhost log-----------------------
+2025-03-24 15:36:06 24-Mar-2025 20:36:06.964 INFO [http-nio-8080-exec-58] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-03-24 15:36:37 24-Mar-2025 20:36:37.289 SEVERE [http-nio-8080-exec-58] org.apache.catalina.core.StandardContext.startInternal One or more listeners failed to start. Full details will be found in the appropriate container log file
+2025-03-24 15:36:37 24-Mar-2025 20:36:37.290 SEVERE [http-nio-8080-exec-58] org.apache.catalina.core.StandardContext.startInternal Context [/lantern-powermonitor-service-2.0.0-DEV] startup failed due to previous errors
+2025-03-24 15:36:37 24-Mar-2025 20:36:37.292 WARNING [http-nio-8080-exec-58] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [lantern-powermonitor-service-2.0.0-DEV] appears to have started a thread named [Catalina-utility-2] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-03-24 15:36:37  org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:4849)
+2025-03-24 15:36:37  org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1172)
+2025-03-24 15:36:37  org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+2025-03-24 15:36:37  org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+2025-03-24 15:36:37  org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1154)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+2025-03-24 15:36:37  org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+2025-03-24 15:36:37  java.base@17.0.14/java.lang.Thread.run(Thread.java:840)
+2025-03-24 15:36:37 24-Mar-2025 20:36:37.293 WARNING [http-nio-8080-exec-58] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [lantern-powermonitor-service-2.0.0-DEV] appears to have started a thread named [Timer-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-03-24 15:36:37  java.base@17.0.14/java.lang.Object.wait(Native Method)
+2025-03-24 15:36:37  java.base@17.0.14/java.lang.Object.wait(Object.java:338)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.TimerThread.mainLoop(Timer.java:537)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.TimerThread.run(Timer.java:516)
+2025-03-24 15:36:37 24-Mar-2025 20:36:37.293 WARNING [http-nio-8080-exec-58] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [lantern-powermonitor-service-2.0.0-DEV] appears to have started a thread named [BufferPoolPruner-1-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-03-24 15:36:37  java.base@17.0.14/jdk.internal.misc.Unsafe.park(Native Method)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1679)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+2025-03-24 15:36:37  java.base@17.0.14/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+2025-03-24 15:36:37  java.base@17.0.14/java.lang.Thread.run(Thread.java:840)
+-----------------------Tomcat Localhost log-----------------------
+```
+
+3) The compiled mongo.cfg file is incorrect, it is not going to your server but to lanternsoftware.com.
+```
+-----------------------Tomcat log-----------------------
+24-Mar-2025 20:36:37.289 SEVERE [http-nio-8080-exec-58] org.apache.catalina.core.StandardContext.listenerStart Exception sending context initialized event to listener instance of class [com.lanternsoftware.powermonitor.context.Globals]
+	com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=lanternsoftware.com:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: Connect timed out}}]
+		at com.mongodb.internal.connection.BaseCluster.createTimeoutException(BaseCluster.java:380)
+		at com.mongodb.internal.connection.BaseCluster.selectServer(BaseCluster.java:125)
+		at com.mongodb.internal.connection.SingleServerCluster.selectServer(SingleServerCluster.java:46)
+		at com.mongodb.internal.binding.ClusterBinding.getWriteConnectionSource(ClusterBinding.java:134)
+		at com.mongodb.client.internal.ClientSessionBinding.getConnectionSource(ClientSessionBinding.java:128)
+		at com.mongodb.client.internal.ClientSessionBinding.getWriteConnectionSource(ClientSessionBinding.java:102)
+		at com.mongodb.internal.operation.SyncOperationHelper.withSuppliedResource(SyncOperationHelper.java:144)
+		at com.mongodb.internal.operation.SyncOperationHelper.withSourceAndConnection(SyncOperationHelper.java:125)
+		at com.mongodb.internal.operation.MixedBulkWriteOperation.lambda$execute$3(MixedBulkWriteOperation.java:188)
+		at com.mongodb.internal.operation.MixedBulkWriteOperation.lambda$decorateWriteWithRetries$0(MixedBulkWriteOperation.java:146)
+		at com.mongodb.internal.async.function.RetryingSyncSupplier.get(RetryingSyncSupplier.java:67)
+		at com.mongodb.internal.operation.MixedBulkWriteOperation.execute(MixedBulkWriteOperation.java:207)
+		at com.mongodb.internal.operation.MixedBulkWriteOperation.execute(MixedBulkWriteOperation.java:77)
+		at com.mongodb.client.internal.MongoClientDelegate$DelegateOperationExecutor.execute(MongoClientDelegate.java:173)
+		at com.mongodb.client.internal.MongoCollectionImpl.executeSingleWriteRequest(MongoCollectionImpl.java:1085)
+		at com.mongodb.client.internal.MongoCollectionImpl.executeDelete(MongoCollectionImpl.java:1058)
+		at com.mongodb.client.internal.MongoCollectionImpl.deleteMany(MongoCollectionImpl.java:537)
+		at com.mongodb.client.internal.MongoCollectionImpl.deleteMany(MongoCollectionImpl.java:532)
+		at com.lanternsoftware.util.dao.mongo.MongoProxy.delete(MongoProxy.java:383)
+		at com.lanternsoftware.util.dao.mongo.MongoProxy.delete(MongoProxy.java:376)
+		at com.lanternsoftware.powermonitor.dataaccess.MongoPowerMonitorDao.<init>(MongoPowerMonitorDao.java:95)
+		at com.lanternsoftware.powermonitor.context.Globals.contextInitialized(Globals.java:31)
+		at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4059)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4501)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+		at org.apache.catalina.manager.ManagerServlet.start(ManagerServlet.java:1303)
+		at org.apache.catalina.manager.HTMLManagerServlet.start(HTMLManagerServlet.java:642)
+		at org.apache.catalina.manager.HTMLManagerServlet.doPost(HTMLManagerServlet.java:188)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:199)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.CsrfPreventionFilter.doFilter(CsrfPreventionFilter.java:430)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.HttpHeaderSecurityFilter.doFilter(HttpHeaderSecurityFilter.java:129)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:597)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:937)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1793)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:840)
+-----------------------Tomcat log-----------------------
+
+-----------------------Tomcat Localhost log-----------------------
+2025-03-24 15:36:37 24-Mar-2025 20:36:37.294 WARNING [http-nio-8080-exec-58] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [lantern-powermonitor-service-2.0.0-DEV] appears to have started a thread named [cluster-ClusterId{value='67e1c237c33bae0559d3ba1a', description='null'}-lanternsoftware.com:27017] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-03-24 15:36:37  java.base@17.0.14/sun.nio.ch.Net.poll(Native Method)
+2025-03-24 15:36:37  java.base@17.0.14/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:186)
+2025-03-24 15:36:37  java.base@17.0.14/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:553)
+2025-03-24 15:36:37  java.base@17.0.14/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602)
+2025-03-24 15:36:37  java.base@17.0.14/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+2025-03-24 15:36:37  java.base@17.0.14/java.net.Socket.connect(Socket.java:633)
+2025-03-24 15:36:37  com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:76)
+2025-03-24 15:36:37  com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:104)
+2025-03-24 15:36:37  com.mongodb.internal.connection.SocketStream.open(SocketStream.java:78)
+2025-03-24 15:36:37  com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:211)
+2025-03-24 15:36:37  com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:196)
+2025-03-24 15:36:37  com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:156)
+2025-03-24 15:36:37  java.base@17.0.14/java.lang.Thread.run(Thread.java:840)
+-----------------------Tomcat Localhost log-----------------------
+```
+
+4) Something is wrong with authKey.dat. Either you pulled the older source before April 7th, 2025 commit or something happened during its generation. Recommend going back and regenerating authKey.dat and make sure to rename properly.
+```
+-----------------------Tomcat LanternPowerMonitor error log-----------------------
+2025-04-07 14:42:06,246 ERROR AESTool - Failed to encrypt data
+java.security.InvalidKeyException: Invalid AES key length: 288 bytes
+        at java.base/com.sun.crypto.provider.AESCrypt.init(AESCrypt.java:90)
+        at java.base/com.sun.crypto.provider.CipherBlockChaining.init(CipherBlockChaining.java:97)
+        at java.base/com.sun.crypto.provider.CipherCore.init(CipherCore.java:482)
+        at java.base/com.sun.crypto.provider.AESCipher.engineInit(AESCipher.java:338)
+        at java.base/javax.crypto.Cipher.implInit(Cipher.java:871)
+        at java.base/javax.crypto.Cipher.chooseProvider(Cipher.java:929)
+        at java.base/javax.crypto.Cipher.init(Cipher.java:1444)
+        at java.base/javax.crypto.Cipher.init(Cipher.java:1375)
+        at com.lanternsoftware.util.cryptography.AESTool.encrypt(AESTool.java:179)
+        at com.lanternsoftware.util.cryptography.AESTool.encryptToBase64(AESTool.java:140)
+        at com.lanternsoftware.powermonitor.dataaccess.MongoPowerMonitorDao.toAuthCode(MongoPowerMonitorDao.java:722)
+        at com.lanternsoftware.powermonitor.dataaccess.MongoPowerMonitorDao.authenticateAccount(MongoPowerMonitorDao.java:676)
+        at com.lanternsoftware.powermonitor.servlet.SignupServlet.doGet(SignupServlet.java:49)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:199)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+        at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+        at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+        at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660)
+        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+        at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:396)
+        at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+        at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:937)
+        at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1793)
+        at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+        at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+        at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+        at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+        at java.base/java.lang.Thread.run(Thread.java:840)
+-----------------------Tomcat LanternPowerMonitor error log-----------------------
+```
+
+5) Energy hub config doesn't have "accept_self_signed_certificates" in config.json set to true.
+```
+-----------------------LanternPowerMonitor Energy Hub error log-----------------------
+2025-04-08 23:15:48,913 ERROR HttpPool - Failed to make http request to https://192.168.150.5:8443/currentmonitor/config
+javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+        at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:131)
+        at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:366)
+        at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:309)
+        at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:304)
+        at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1357)
+        at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.onConsumeCertificate(CertificateMessage.java:1232)
+        at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.consume(CertificateMessage.java:1175)
+        at java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:392)
+        at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:443)
+        at java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:421)
+        at java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:189)
+        at java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+        at java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1511)
+        at java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1421)
+        at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:456)
+        at java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:427)
+        at org.apache.http.conn.ssl.SSLConnectionSocketFactory.createLayeredSocket(SSLConnectionSocketFactory.java:396)
+        at org.apache.http.conn.ssl.SSLConnectionSocketFactory.connectSocket(SSLConnectionSocketFactory.java:355)
+        at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:142)
+        at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:359)
+        at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:381)
+        at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:237)
+        at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:185)
+        at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89)
+        at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:111)
+        at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+        at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
+        at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:108)
+        at com.lanternsoftware.util.http.HttpPool.execute(HttpPool.java:87)
+        at com.lanternsoftware.util.http.HttpPool.executeToPayload(HttpPool.java:121)
+        at com.lanternsoftware.util.http.HttpPool.executeToByteArray(HttpPool.java:114)
+        at com.lanternsoftware.util.http.HttpPool.executeToString(HttpPool.java:110)
+        at com.lanternsoftware.currentmonitor.MonitorApp.main(MonitorApp.java:243)
+Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+        at java.base/sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:439)
+        at java.base/sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:306)
+        at java.base/sun.security.validator.Validator.validate(Validator.java:264)
+        at java.base/sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:313)
+        at java.base/sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:222)
+        at java.base/sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:129)
+        at java.base/sun.security.ssl.CertificateMessage$T13CertificateConsumer.checkServerCerts(CertificateMessage.java:1341)
+        ... 28 common frames omitted
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+        at java.base/sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:148)
+        at java.base/sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:129)
+        at java.base/java.security.cert.CertPathBuilder.build(CertPathBuilder.java:297)
+        at java.base/sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:434)
+        ... 34 common frames omitted
+2025-04-08 23:15:48,918 ERROR MonitorApp - Failed to load breaker config.  Retrying in 5 seconds...
+-----------------------LanternPowerMonitor Energy Hub error log-----------------------
+```
+
+
+<br/>
+
 ### Misc/My Setup ###
 Boards
 
