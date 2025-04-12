@@ -197,9 +197,8 @@ Go to your Lantern Power Monitor mobile app and get to the login screen.
 
 ![image](https://github.com/user-attachments/assets/f4c9e971-3b5b-4152-9179-7628bcf22b68)
 
-Click on the bottom right, "Host" and change it from "LanternPowermonitor.com" to "https://Unraid_IP:8443".
-
-You can then click on signup and create an account. If everything is setup correctly you should be able to login. You can also see your account get created in MongoDB_Express, CURRENT_MONITOR\account.
+Click on the bottom right, "Host" and change it from "LanternPowermonitor.com" to "https://Unraid_IP:8443".  
+You can then click on signup and create an account. If everything is setup correctly you should be able to login. You can also see your account get created in MongoDB_Express, CURRENT_MONITOR\account.  
 
 <br/>
 
@@ -221,9 +220,9 @@ You should be able to use the mobile app to adopt your energy hubs.
 <br/>
 
 ## ENERGY HUB CALIBRATION ##
-After adopting energy hubs and creating a panel on the mobile app, you then need to calibrate them. 
-I had a multimeter and I bought a digital currrent clamp tester (www.amazon.com/dp/B0CVXCFMLY?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2). 
-Using the multimeter on the 12V AC/AC voltage transformer, I connected a gator clamp to one side and testing probe to the other. 
+After adopting energy hubs and creating a panel on the mobile app, you then need to calibrate them.  
+I had a multimeter and I bought a digital currrent clamp tester (www.amazon.com/dp/B0CVXCFMLY?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2).  
+Using the multimeter on the 12V AC/AC voltage transformer, I connected a gator clamp to one side and testing probe to the other.  
 ![image](https://github.com/user-attachments/assets/963c120b-f854-4a0b-9cc5-47a48c079522)
 ![image](https://github.com/user-attachments/assets/da7de150-30e7-4b3f-8b4e-f85c1a5f2971)
 
