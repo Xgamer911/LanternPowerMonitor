@@ -240,20 +240,20 @@ I tweaked the Hub # CT number on the mobile app to match the digital current cla
 <br/>
 
 ## OTHER NOTES ##
-Log Locations
-<ins>Tomcat Container</ins>
-/usr/local/tomcat/logs/
-catalina.DATE.log - Tomcat general logs. Useful for troubleshooting the currentmonitor.war deployment.
-localhost.DATE.log - Tomcat error logs. Useful for troubleshooting the currentmonitor.war deployment.
-localhost_access_log.DATE.txt - Access logs for what devices are talking to Tomcat. Good for checking if your Energy hubs are talking to tomcat.
-manager.DATE.log - General Context info
+Log Locations  
+<ins>Tomcat Container</ins>  
+/usr/local/tomcat/logs/  
+catalina.DATE.log - Tomcat general logs. Useful for troubleshooting the currentmonitor.war deployment.  
+localhost.DATE.log - Tomcat error logs. Useful for troubleshooting the currentmonitor.war deployment.  
+localhost_access_log.DATE.txt - Access logs for what devices are talking to Tomcat. Good for checking if your Energy hubs are talking to tomcat.  
+manager.DATE.log - General Context info  
 
-/opt/tomcat/log/
-log.txt - CurrentMonitor.war logging. This will show what the tomcat power monitor service is doing or any errors that are happening. This will also show energy hubs checking in and updating power readings.
+/opt/tomcat/log/  
+log.txt - CurrentMonitor.war logging. This will show what the tomcat power monitor service is doing or any errors that are happening. This will also show energy hubs checking in and updating power readings.  
 
-<ins>Energy Hub</ins>
-/opt/currentmonitor/log/
-log.txt - Basic Energy hub logs. If you are having issues with the energy hub and tomcat server talking check here for any errors.
+<ins>Energy Hub</ins>  
+/opt/currentmonitor/log/  
+log.txt - Basic Energy hub logs. If you are having issues with the energy hub and tomcat server talking check here for any errors.  
 
 ### Misc/My Setup ###
 Boards
