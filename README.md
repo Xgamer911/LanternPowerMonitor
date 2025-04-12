@@ -214,6 +214,7 @@ This gave me the Hub # V for the panel calibration.
 
 ![image](https://github.com/user-attachments/assets/da9f8c86-ef26-4d19-b059-b695a3d932d3)
 
+
 I swapped it from watts to amps in the mobile app. I then took my digital current clamp tester and hooked it to a circuit on that hub that was a stable number and not jumping around.
 ![image](https://github.com/user-attachments/assets/544edcee-2cd5-48e2-8019-62a78e0da370)
 I tweaked the Hub # CT number on the mobile app to match the digital current clamp reading, then saved the settings.
