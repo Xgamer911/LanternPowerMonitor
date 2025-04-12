@@ -28,7 +28,7 @@ What these commands did was to update and upgrade the operating system. Then dow
 
 <br/>
 
-** NEW TERMINAL WINDOW 2 **
+**NEW TERMINAL WINDOW 2**
 
 I may have beening doing this section wrong but this is how I got it to work. Normally after compiling you should have been able to run
 ```
@@ -62,7 +62,7 @@ sudo ./gradlew clean build publishToMavenLocal
 
 <br/>
 
-** MOVE BACK TO TERMINAL WINDOW 2 **
+**MOVE BACK TO TERMINAL WINDOW 2**
 
 This section builds the authKey.dat and moongo.cfg files that are needed for the Tomcat server LanternPowerMonitor service. One thing I figured out during this portion was that the CreateAuthKey would generate a mongo.cfg file rather than the authKey.dat file. So you have to generate the file and then mv/renmae it before generating the config. The copy commands just copied the files to a shared folder so you can get them off your virtual machine, if you do not have drag and drop enabled.
 ```
@@ -75,7 +75,7 @@ sudo cp /opt/tomcat/mongo.cfg /mnt/host/mongo.cfg
 sudo cp ~/LanternPowerMonitor/java/lantern-powermonitor-service/build/libs/lantern-powermonitor-service-2.0.0-DEV.war /mnt/host/currentmonitor.war
 ```
 
-
+<br/>
 
 ## Diverging ##
 This is where everyone will go separate ways. You can have the Tomcat/MongoDB hosted on a raspiberry pi, within a server's docking container, or in some other hosting fashion. The rest of this guide was on my setup. I already had a home server running Unraid so I chose to run Tomcat/MongoDB within my docker environment.
@@ -101,6 +101,7 @@ db.createUser(
 ```
 You best bet with this is to run the first two commands and then copy and paste the entire db.createUser().
 
+<br/>
 
 ### MongoDB_Express Container ###
 I setup another container and installed the latest version of MongoDB_express with the following config.
@@ -110,6 +111,7 @@ After it is installed you should be able to goto the IP:Port and login. This wil
 ![image](https://github.com/user-attachments/assets/319508ee-29c8-4ff4-9de9-9a75ec8cc065)
 Yours shouldn't have CURRENT_MONITOR yet, this is a screenshot from after everything is installed.
 
+<br/>
 
 ### Tomcat Container ###
 This was a PITA. I started off by setting up the tomcat docker container with the following config. I set my tomcat container to host network instead of bridge. I am not sure why I had to do this instead of bridging. I think this was due to the self signed SSL certificates, but I am not sure. (This might also be a hold over from when I was testing the docker containers on my host system and not the server. However since I have this on host instead of bridge the ports are irrelevant to the setup of the docker container.
@@ -175,6 +177,7 @@ Then because I was testing, I shut down the Tomcat container and modified it to:
 ![image](https://github.com/user-attachments/assets/e42b5699-c1b6-4c61-8e0c-64628c13b072)
 I mounted the /opt/tomcat and /usr/local/tomcat directories so I could access them from the server system and not have to use the console again. I am not sure if it was my testing or something I did, but this broke my Tomcat container. The tomcat directory was empty when I did this, so I just copied the tomcat backup in the home directory back into /usr/local/tomcat and the container started working again.
 
+<br/>
 
 ### Tomcat PowerLanternService setup ###
 I copied the authKey.dat and mongo.cfg from the debian shared folder to the Tomcat container's /opt/tomcat folder.
@@ -198,6 +201,7 @@ Click on the bottom right, "Host" and change it from "LanternPowermonitor.com" t
 
 You can then click on signup and create an account. If everything is setup correctly you should be able to login. You can also see your account get created in MongoDB_Express, CURRENT_MONITOR\account.
 
+<br/>
 
 ## ENERGY HUB SETUP ##
 Not a lot has to happen here other than enabling "accept_self_signed_certificates".
@@ -213,6 +217,8 @@ or
 sudo reboot
 ```
 You should be able to use the mobile app to adopt your energy hubs.
+
+<br/>
 
 ## ENERGY HUB CALIBRATION ##
 After adopting energy hubs and creating a panel on the mobile app, you then need to calibrate them. 
@@ -230,6 +236,8 @@ I swapped it from watts to amps in the mobile app. I then took my digital curren
 ![image](https://github.com/user-attachments/assets/544edcee-2cd5-48e2-8019-62a78e0da370)
 
 I tweaked the Hub # CT number on the mobile app to match the digital current clamp reading, then saved the settings.
+
+<br/>
 
 ## OTHER NOTES ##
 Log Locations
