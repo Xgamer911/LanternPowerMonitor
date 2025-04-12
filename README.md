@@ -211,6 +211,7 @@ Using the multimeter on the 12V AC/AC voltage transformer, I connected a gator c
 ![image](https://github.com/user-attachments/assets/da7de150-30e7-4b3f-8b4e-f85c1a5f2971)
 
 This gave me the Hub # V for the panel calibration.
+
 ![image](https://github.com/user-attachments/assets/da9f8c86-ef26-4d19-b059-b695a3d932d3)
 
 I swapped it from watts to amps in the mobile app. I then took my digital current clamp tester and hooked it to a circuit on that hub that was a stable number and not jumping around.
