@@ -69,9 +69,9 @@ sudo cp ~/LanternPowerMonitor/java/lantern-powermonitor-service/build/libs/lante
 
 
 ## Diverging ##
-### MongoDB ###
 This is where everyone will go separate ways. You can have the Tomcat/MongoDB hosted on a raspiberry pi, within a server's docking container, or in some other hosting fashion. The rest of this guide was on my setup. I already had a home server running Unraid so I chose to run Tomcat/MongoDB within my docker environment.
 
+### MongoDB ###
 I started by creating a MongoDB container using the following options.
 ![image](https://github.com/user-attachments/assets/ef42e267-f198-4489-b259-2d2b91ec4e33)
 
@@ -203,6 +203,19 @@ sudo reboot
 ```
 You should be able to use the mobile app to adopt your energy hubs.
 
+## ENERGY HUB CALIBRATION ##
+After adopting energy hubs and creating a panel on the mobile app, you then need to calibrate them. 
+I had a multimeter and I bought a digital currrent clamp tester (www.amazon.com/dp/B0CVXCFMLY?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2). 
+Using the multimeter on the 12V AC/AC voltage transformer, I connected a gator clamp to one side and testing probe to the other. 
+![image](https://github.com/user-attachments/assets/963c120b-f854-4a0b-9cc5-47a48c079522)
+![image](https://github.com/user-attachments/assets/da7de150-30e7-4b3f-8b4e-f85c1a5f2971)
+
+This gave me the Hub # V for the panel calibration.
+![image](https://github.com/user-attachments/assets/da9f8c86-ef26-4d19-b059-b695a3d932d3)
+
+I swapped it from watts to amps in the mobile app. I then took my digital current clamp tester and hooked it to a circuit on that hub that was a stable number and not jumping around.
+![image](https://github.com/user-attachments/assets/544edcee-2cd5-48e2-8019-62a78e0da370)
+I tweaked the Hub # CT number on the mobile app to match the digital current clamp reading, then saved the settings.
 
 ## OTHER NOTES ##
 Log Locations
@@ -220,6 +233,31 @@ log.txt - CurrentMonitor.war logging. This will show what the tomcat power monit
 /opt/currentmonitor/log/
 log.txt - Basic Energy hub logs. If you are having issues with the energy hub and tomcat server talking check here for any errors.
 
+### Misc/My Setup ###
+Boards
+![image](https://github.com/user-attachments/assets/7aacfec2-737f-4151-bf01-9717f521f55d)
+![image](https://github.com/user-attachments/assets/909d6981-8b59-4f0e-9e34-74337128b79e)
 
+Starting Solder
+![image](https://github.com/user-attachments/assets/fa77976c-d2ea-4591-913d-29d83b377878)
+![image](https://github.com/user-attachments/assets/eb39148f-4fb9-49f0-a4f7-a3ab4c542bb9)
+![image](https://github.com/user-attachments/assets/f1cc4d82-322c-4285-8672-cb9c8b97bafc)
+![image](https://github.com/user-attachments/assets/7a3e70d4-2761-416e-bb54-3f83105f4f67)
+
+Hatted with case
+![image](https://github.com/user-attachments/assets/0fc9401b-4ddc-4439-9eda-6940399b4535)
+![image](https://github.com/user-attachments/assets/8a05a8ec-bdb2-411c-93d7-a585cf31ebef)
+
+Current Clamps
+![image](https://github.com/user-attachments/assets/d9696077-9ca2-4352-84b2-c7fc12cf8653)
+
+Wire wrapping
+![image](https://github.com/user-attachments/assets/52ef5f90-4650-41e3-888f-5c3f574f5281)
+
+Energy Hub Mounted
+![image](https://github.com/user-attachments/assets/2e056a7c-7717-42e3-8fcb-a865b344f2b2)
+
+Energy Hubs Wired
+![image](https://github.com/user-attachments/assets/9927fd13-7e83-4219-b573-738bdd0aed28)
 
 
